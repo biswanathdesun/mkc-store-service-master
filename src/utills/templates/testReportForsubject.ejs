@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table</title>
+    <style></style>
+  </head>
+
+  <body>
+    <div style="width: 100%">
+      <% if (data?.subjectNames && data.subjectNames.length> 0) { %>
+      <table border="2" style="width: 100%; border-collapse: collapse">
+        <!-- Header row for organization name -->
+        <tr style="background-color: rgb(159, 218, 159)">
+          <th
+            colspan="<%= (data?.subjectNames.length * 4) + 5 %>"
+            style="
+              font-size: 12px;
+              font-weight: 500;
+              border: 1px solid black;
+              padding: 8px;
+              text-align: center;
+            "
+          >
+            MAJOR KALSHI CLASSES PVT. LMT.
+          </th>
+        </tr>
+
+        <!-- Header row for test name -->
+        <tr style="background-color: rgb(159, 218, 159)">
+          <th
+            colspan="<%= (data?.subjectNames.length * 4) + 5 %>"
+            style="
+              font-size: 12px;
+              font-weight: 500;
+              border: 1px solid black;
+              padding: 8px;
+              text-align: center;
+              text-transform: uppercase;
+            "
+          >
+            <%= data.title %>
+          </th>
+        </tr>
+        <!-- Header row for test date -->
+        <tr style="background-color: rgb(159, 218, 159)">
+          <th
+            colspan="<%= (data?.subjectNames.length * 4) + 5 %>"
+            style="
+              font-size: 12px;
+              font-weight: 500;
+              border: 1px solid black;
+              padding: 8px;
+              text-align: center;
+            "
+          >
+            TEST DATE: <%= data.date %>
+          </th>
+        </tr>
+        <!-- Header for subjects -->
+        <tr
+          style="
+            background-color: rgb(160, 154, 154);
+            border: 1px solid black;
+            text-align: center;
+          "
+        >
+          <th style="padding: 8px"></th>
+          <th style="padding: 8px"></th>
+          <% data.subjectNames.forEach((item)=> { %>
+          <th
+            colspan="4"
+            style="font-size: 10px; font-weight: 100; padding: 8px"
+          >
+            <%= item %>
+          </th>
+          <% }); %>
+          <th colspan="3"></th>
+        </tr>
+        <!-- Table header row for data -->
+        <tr style="font-size: 8px; border: 1px solid black; text-align: center">
+          <!-- Table headers -->
+          <th style="padding: 8px">S.N.</th>
+          <th style="padding: 8px">CANDIDATE NAME</th>
+          <% data.subjectNames.forEach((subject, index)=> { %>
+          <th style="padding: 8px">R</th>
+          <th style="padding: 8px">W</th>
+          <th style="padding: 8px">L</th>
+          <th style="padding: 8px">MK</th>
+          <% }); %>
+          <th style="padding: 8px">TOTAL</th>
+          <th style="padding: 8px">%</th>
+          <th style="padding: 8px">RANK</th>
+        </tr>
+        <!-- Data rows -->
+        <% data?.students.forEach((student, index)=> { %>
+        <tr style="font-size: 9px; text-align: center; border: 1px solid black">
+          <td style="padding: 8px"><%= index + 1 %></td>
+          <td style="padding: 8px"><%= student.name %></td>
+          <% student.result.forEach((subjectData)=> { %>
+          <td style="padding: 8px"><%= subjectData.correct %></td>
+          <td style="padding: 8px"><%= subjectData.inCorrect %></td>
+          <td style="padding: 8px"><%= subjectData.unAttempted %></td>
+          <td style="padding: 8px"><%= subjectData.score %></td>
+          <% }); %>
+
+          <!-- Displaying total, percentage, and rank -->
+          <td style="padding: 8px"><%= student.totalMark %></td>
+          <td style="padding: 8px"><%= student.percentage %>%</td>
+          <td style="padding: 8px"><%= student.rank %></td>
+        </tr>
+        <% }); %>
+      </table>
+      <% } else { %>
+      <p>No subjects available.</p>
+      <% } %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packaging-List</title>
+
+    <style>
+        * {
+            margin-right: 0px !important;
+            margin-left: 0px !important;
+            padding: 0 !important;
+            font-family: Arial, sans-serif !important;
+        }
+
+        body {
+            width: 100% !important;
+            height: 100% !important;
+
+        }
+
+        main {
+            width: 100% !important;
+            height: 100% !important;
+
+        }
+
+        main header {
+            text-align: center !important;
+        }
+
+        main .center {
+            width: 100% !important;
+            height: 100% !important;
+            background-color: #fff !important;
+            padding: 20px !important;
+        }
+
+        header h2 {
+            font-size: 12px !important;
+            margin-top: 5px !important;
+
+        }
+
+        header h3 {
+            font-size: 9px !important;
+            font-weight: 550 !important;
+            margin: 0px !important;
+        }
+
+        .left {
+            width: 48% !important;
+            float: left !important;
+            margin-top: 10px !important;
+            margin-bottom: 20px !important;
+        }
+
+        .right {
+            width: 48% !important;
+            float: right !important;
+            margin-top: 10px !important;
+        }
+
+        .left h2,
+        .right h2 {
+            font-size: 11px !important;
+
+        }
+
+        .left h4,
+        .right h4 {
+            margin: 3px 0px !important;
+            font-size: 9px !important;
+            font-weight: 400 !important;
+        }
+
+        .table {
+            width: 100% !important;
+            border-collapse: collapse !important;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #070707 !important;
+            padding: 5px !important;
+            font-size: 9px !important;
+        }
+
+        .table td {
+            border: 1px solid #070707 !important;
+            padding: 5px !important;
+            font-size: 8px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="center">
+
+            <header>
+                <img style="height: 30px;  object-fit:contain; margin-bottom: 5px" src="<%= logoLink %>"
+                    alt="Company Logo" />
+                <h2>Packing List for Order No : <%=orderNo%>
+                </h2>
+                <h3>Order Date : <%=orderDate%>
+                </h3>
+            </header>
+
+            <div class="left">
+                <h2>Shipping Address</h2>
+                <h4>
+                    <%=customerName%>
+                </h4>
+                <h4>Add- <%=address%>
+                </h4>
+                <h4>City- <%=cityName%>, Zip- <%=pincode%>
+                </h4>
+                <h4>State- <%=stateName%>
+                </h4>
+                <h4>Phone- <%=customerMobile%>
+                </h4>
+            </div>
+            <div style="margin:0 auto ; width:90%">
+                <table class="table">
+                    <tr>
+                        <th style="text-align:center">#</th>
+                        <th style="text-align:left">Product</th>
+                        <th style="text-align:center">Quantity</th>
+                    </tr>
+                    <%tableData.forEach((item, index)=> {%>
+                        <tr>
+                            <td style="text-align:center">
+                                <%=index + 1%>
+                            </td>
+                            <td style="text-align:start">
+                                <%=item.name%>
+                            </td>
+                            <td style="text-align:center">
+                                <%=item.quantity%>
+                            </td>
+                        </tr>
+                        <%})%>
+                            <tr>
+                                <th style="text-align:center"></th>
+                                <th style="text-align:left">Payment Method:</th>
+                                <th style="text-align:center">
+                                    <%=paymentMethod%>
+                                </th>
+                            </tr>
+                </table>
+            </div>
+
+            <div class="right">
+                <h2>From :</h2>
+                <h4>"SHAPATH BUILDING"</h4>
+                <h4>105/244 , TAGORE TOWN ALLAHABAD</h4>
+                <h4>Phone : +919696330033</h4>
+                <h4>Email : support@majorkalshiclasses.com</h4>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MKC Heath Care</title>
+    <style>
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif !important;
+        }
+
+        .mainContainer {
+            margin: 20px auto !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        .childContainer {
+            padding: 0px 10px;
+        }
+
+        .childContainer.childContainerWithPadding {
+            padding-top: 150px;
+        }
+
+        .heading {
+            font-size: 10px;
+        }
+
+        .imgLogo {
+            margin: 10px !important;
+        }
+
+        table {
+            width: 100% !important;
+            text-align: left !important;
+        }
+
+        table,
+        th,
+        td {
+            border: none;
+            border-collapse: collapse !important;
+            padding: 3px !important;
+            font-size: 7px !important;
+        }
+
+        .table {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .tableContainer table {
+            width: 100% !important;
+            border-collapse: collapse !important;
+        }
+
+        .tableContainer table th,
+        .tableContainer table td {
+            padding: 5px !important;
+            text-align: left !important;
+            font-size: 10px;
+        }
+
+        .labIncharge {
+            display: flex;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .labIncharge .label {
+            margin-right: 10px;
+        }
+
+        .labIncharge .details {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* Page break for print */
+        .print-page {
+            page-break-before: always;
+        }
+
+        /* Top margin for each page */
+        @media print {
+            .mainContainer {
+                margin-top: 150px !important;
+            }
+
+            /* Apply top margin to every printed page */
+            @page {
+                margin-top: 150px !important;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <% data.testDetails.forEach((item, index)=> { %>
+        <div class="mainContainer <%= index !== 0 ? 'print-page' : '' %>">
+            <div class="childContainer <%= index !== 0 ? 'childContainerWithPadding' : '' %>">
+                <h3 style="font-size: 9px; text-align:center ;" class="heading">PATHOLOGY REPORT</h3>
+                <hr style="border-color: black; border-width: 1px; border-style: solid;">
+
+                <div class="table">
+                    <div class="tableContainer">
+                        <table>
+                            <tr>
+                                <th>Name: </th>
+                                <td style="text-align: left;">
+                                    <%= item.userDetails?.name %>
+                                </td>
+                                <th>Age/ Gender:</th>
+                                <td>
+                                    <%= item.userDetails?.age %> Years / <%= item.userDetails?.gender %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Referred By:</th>
+                                <td>SELF</td>
+                                <th>Referring Customer:</th>
+                                <td>SELF</td>
+                            </tr>
+                            <tr>
+                                <th>Client Address:</th>
+                                <td>
+                                    <%= item.userDetails?.address %>
+                                </td>
+                                <th>Report Date:</th>
+                                <td>
+                                    <%= item.userDetails?.reportDate %>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+                <hr style="border-color: black; border-width: 1px; border-style: solid;">
+                <div>
+                    <h6 style="text-align: center; margin: 1px;">
+                        <%= item?.categoryName %>
+                    </h6>
+                </div>
+                <hr style="border-color: black; border-width: 1px; border-style: solid;">
+                <table>
+                    <tr style="border-bottom: 1px solid black">
+                        <th>Test Name</th>
+                        <th></th>
+                        <th>Observed Values</th>
+                        <th>Unit</th>
+                        <th>Biological Ref. Range</th>
+                    </tr>
+                    <% item.allTests.map((value, index)=> { %>
+                        <% if (value.type !=='document' ) { %>
+                            <% if (value.type==='multiple' ) { %>
+                                <tr>
+                                    <td colspan="5">
+                                        <%= value?.name %>
+                                    </td>
+                                </tr>
+                                <% } %>
+                                    <% value.nestedTest.map((ele, index)=> { %>
+                                        <% if (ele.valueRange==='H' || ele.valueRange==='L' ) { %>
+                                            <tr style="font-weight: bold;">
+                                                <% } else { %>
+                                            <tr>
+                                                <% } %>
+                                                    <td>
+                                                        <%= ele?.name %>
+                                                    </td>
+                                                    <td>
+                                                        <%= ele.valueRange==='H' || ele.valueRange==='L' ? 'H' : '' %>
+                                                    </td>
+                                                    <td>
+                                                        <%= ele?.value %>
+                                                    </td>
+                                                    <td>
+                                                        <%= ele?.unitName %>
+                                                    </td>
+                                                    <td>
+                                                        <%= ele?.reference %>
+                                                    </td>
+                                            </tr>
+                                            <% }) %>
+                                                <% } else { %>
+                                                    <tr>
+                                                        <td colspan="5" style="text-align: center;font-weight: bold">
+                                                            <%= value?.nestedTest[0]?.name %>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="5"><%- value?.nestedTest[0]?.value %></td>
+                                                    </tr>
+
+                                                    <% } %>
+                                                        <% }) %>
+                </table>
+                <hr style="border-color: black; border-width: 1px; border-style: solid;">
+                <p style="text-align:center; padding: 12px; font-size: 12px; font-weight: bold">*****End Of Report*****</p>
+
+                <table >
+                    <tr>
+                        <th style="font-size: 12; font-weight: bold;">Lab Incharge</th>
+                        <th style="text-align: end; font-size: 12; font-weight: bold;">Dr Neha Shrma</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th style="text-align: end; font-size: 12; font-weight: bold;">MD(Pathology)</th>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+        <% }) %>
+</body>
+
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book-Invoice</title>
+
+    <style>
+      * {
+        margin: 0 !important;
+        padding: 0 !important;
+        font-family: Arial, sans-serif !important;
+      }
+
+      body {
+        width: 100%;
+        height: 100%;
+      }
+
+      header {
+        text-align: center !important;
+      }
+
+      header img {
+        display: inline-block !important;
+      }
+
+      .center {
+        width: 100% !important;
+        height: 100% !important;
+        margin: 10px auto !important;
+        background-color: white !important;
+        padding: 20px !important;
+      }
+
+      header h2 {
+        font-size: 12px !important;
+        margin-top: 5px !important;
+      }
+
+      header h3 {
+        font-size: 9px !important;
+        font-weight: 300 !important;
+        margin-top: 5px !important;
+      }
+
+      .center-div {
+        margin-top: 15px !important;
+        margin-bottom: 20px !important;
+        width: 100% !important;
+      }
+
+      .left,
+      .right {
+        display: inline-block !important;
+        width: 48% !important;
+        text-align: left !important;
+        vertical-align: top;
+      }
+
+      .left h2,
+      .right h2 {
+        margin-bottom: 10px !important;
+        font-size: 10px !important;
+      }
+
+      .left h4,
+      .right h4 {
+        margin: 5px 0px !important;
+        font-size: 8px !important;
+        font-weight: 400 !important;
+      }
+
+      /* table start */
+      .table {
+        width: 90% !important;
+        border-collapse: collapse !important;
+      }
+
+      .table th,
+      .table td {
+        border: 1px solid #070707 !important;
+        padding: 5px !important;
+        font-size: 9px !important;
+      }
+
+      .table td {
+        border: 1px solid #070707 !important;
+        padding: 5px !important;
+        font-size: 8px !important;
+      }
+
+      .table tr td {
+        font-weight: 600 !important;
+      }
+
+      /* botton-right start */
+      .botton-right {
+        width: 100% !important;
+        margin-top: 20px !important;
+        text-align: right !important;
+      }
+
+      .botton-right h2 {
+        margin-bottom: 5px !important;
+        font-size: 10px !important;
+      }
+
+      .botton-right h4 {
+        margin: 5px 0px !important;
+        font-size: 8px !important;
+        font-weight: 400 !important;
+      }
+
+      .botton-right > div {
+        width: 50% !important;
+        display: inline-block !important;
+        text-align: left !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="center">
+      <header>
+        <img
+          style="height: 30px; object-fit: contain"
+          src="<%= logoLink %>"
+          alt="Company Logo"
+        />
+        <h2>Invoice No: <%=invoiceNo%></h2>
+        <h3>Order Date: <%=orderDate%></h3>
+      </header>
+
+      <div class="center-div">
+        <div class="left">
+          <h2>Customer Details</h2>
+          <h4><%=customerName%></h4>
+          <h4><%=customerMobile%></h4>
+          <h4><%=customerEmail%></h4>
+        </div>
+        <div class="right">
+          <h2>Shipping Address</h2>
+          <h4><%=address%></h4>
+          <h4><%=cityName%>, <%=pincode%></h4>
+          <h4><%=stateName%></h4>
+        </div>
+      </div>
+
+      <table class="table">
+        <tr>
+          <th style="text-align: left">S. No</th>
+          <th>Particular</th>
+          <th>Code</th>
+          <th>Mode</th>
+          <th>Bank Details</th>
+          <th style="text-align: right">Amount</th>
+        </tr>
+        <%tableData.forEach((item, index)=> {%>
+        <tr>
+          <td style="text-align: left"><%= index + 1%></td>
+          <td style="text-align: center"><%=item.name%></td>
+          <td style="text-align: center"><%=item.skuCode%></td>
+          <td style="text-align: center"><%=item.paymentMode%></td>
+          <td style="text-align: center"><%=item.bankDetails%></td>
+          <td style="font-weight: 100; text-align: right"><%=item.amount%></td>
+        </tr>
+        <%})%>
+      </table>
+
+      <div class="botton-right">
+        <div style="width: 50%; display: inline-block">
+          <h2>From :</h2>
+          <h4>"SHAPATH BUILDING"</h4>
+          <h4>105/244, TAGORE TOWN ALLAHABAD</h4>
+          <h4>Phone: +919696330033</h4>
+          <h4>Email: support@majorkalshiclasses.com</h4>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

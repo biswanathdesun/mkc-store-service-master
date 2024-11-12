@@ -1,0 +1,13 @@
+export const MKC_CONVERTER = 'mkcconverted';
+export const BOOK_THUMBNAIL = 'book-thumbnail';
+export const BOOK_SAMPLE_DOWNLOAD = 'book-sample-download';
+export const BOOK_LIBRARY = 'book-library';
+export const ONLINE_COURSE_THUMBNAIL = 'online-course-thumbnail';
+export const ONLINE_COURSE_PDF = 'online-course-pdf';
+export const TEST_SERIES_THUMBNAIL = 'test-series';
+export const PAYMENT_RECEIPT = 'payment-receipt';
+export const COURSE_LIBRARY_THUMBNAIL = 'course_library_thumbnail';
+export const HOSTEL_IMAGES = 'hostel_images';
+export const Health_HUB = 'health_hub_images';
+export const HEALTH_CARE_PACKAGE = 'health_care_package_images';
+export const LIVE_CONSULTATION = 'live_consultation_image';

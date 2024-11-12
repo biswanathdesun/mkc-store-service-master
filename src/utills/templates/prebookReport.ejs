@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Admission Details</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-size: 7px !important;
+        }
+
+        h2 {
+            text-align: center !important;
+            margin: 10px 0 !important;
+            font-size: 12px !important;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 4px;
+            text-align: left;
+            font-size: 7px;
+            word-wrap: break-word;
+            /* Wrap long strings */
+        }
+    </style>
+</head>
+
+<body>
+    <p style="text-align : right; font-size: 8px">
+        <%= date %>
+    </p>
+    <h2>Prebook Defaulter Report</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Mobile No</th>
+                <th>Course</th>
+                <th>Total Amount</th>
+                <th>Prebook Amount</th>
+                <th>Due Amount</th>
+                <th>Next Payment Date</th>
+                <th>Extended Date</th>
+                <th>Counsellor</th>
+                <th>Remark</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.map((student, index)=> { %>
+                <tr>
+                    <td>
+                        <%= index + 1 %>
+                    </td>
+                    <td>
+                        <%= student.username %>
+                    </td>
+                    <td>
+                        <%= student.studentPhone %>
+                    </td>
+                    <td>
+                        <%= student.course %>
+                    </td>
+                    <td>
+                        <%= student.productAmount %>
+                    </td>
+                    <td>
+                        <%= student.totalAmtReceived %>
+                    </td>
+                    <td>
+                        <%= student.outstandingAmount %>
+                    </td>
+                    <td>
+                        <%= student.nextPaymentDate %>
+                    </td>
+                    <td>
+                        <%= student.extendedPaymentDate %>
+                    </td>
+                    <td>
+                        <% if (student.primaryCounsellor && student.secondaryCounsellor) { %>
+                            <%= student.primaryCounsellor %> / <%= student.secondaryCounsellor %>
+                                    <% } else if (student.primaryCounsellor) { %>
+                                        <%= student.primaryCounsellor %>
+                                            <% } else if (student.secondaryCounsellor) { %>
+                                                <%= student.secondaryCounsellor %>
+                                                    <% } %>
+                    </td>
+                    <td>
+                        <%= student.remark %>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</body>
+
+</html>

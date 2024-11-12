@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manual Order Report</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            margin: 0 auto !important;
+            background-color: #fff !important;
+            padding: 10px;
+            position: relative !important;
+        }
+
+        .header {
+            border-bottom: 2px solid #007bff !important;
+            margin-bottom: 20px !important;
+            padding-bottom: 10px !important;
+            text-align: center !important;
+        }
+
+        .header h2 {
+            font-size: 18px !important;
+            color: #007bff !important;
+            font-weight: bold !important;
+            margin: 0 !important;
+        }
+
+        /* Date in the top-right corner */
+        .date {
+            position: absolute !important;
+            top: 10px !important;
+            right: 20px !important;
+            font-size: 12px !important;
+            color: #555 !important;
+        }
+
+        table {
+            width: 100% !important;
+            border-collapse: collapse !important;
+            margin-bottom: 20px !important;
+            
+        }
+
+        table th,
+        table td {
+            padding: 4px!important;
+            border: 1px solid #000!important;
+            text-align: left!important;
+            font-size: 7px!important;
+            word-wrap: break-word!important;
+        }
+
+        th {
+            background-color: #007bff!important;
+            color: #fff!important;
+            font-weight: bold!important;
+        }
+
+        td {
+            background-color: #f9f9f9!important;
+            color: #333!important;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f1f1f1!important;
+        }
+
+        tbody tr:hover {
+            background-color: #e9ecef!important;
+        }
+
+        .footer {
+            text-align: center!important;
+            margin-top: 20px!important;
+            font-size: 10px!important;
+            color: #888!important;
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body {
+                background-color: #fff;
+            }
+
+            .container {
+                border: none;
+                box-shadow: none;
+            }
+
+            table {
+                font-size: 8px; /* Reduce font size for printing */
+            }
+
+            .date {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Date in the top-right corner -->
+        <div class="date">
+            <%= date %>
+        </div>
+
+        <!-- Centered heading below the date -->
+        <div class="header">
+            <h2>Manual Order Report</h2>
+        </div>
+
+        <!-- Table with order details -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Order Id</th>
+                    <th>Student Name</th>
+                    <th>Phone</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Language</th>
+                    <th>Payment Mode</th>
+                    <th>Sale By</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.forEach(function(item) { %>
+                    <tr>
+                        <td>
+                            <%= item.orderId %>
+                        </td>
+                        <td>
+                            <%= item.user %>
+                        </td>
+                        <td>
+                            <%= item.phone %>
+                        </td>
+                        <td>
+                            <%= item.productName %>
+                        </td>
+                        <td>
+                            <%= item.price %>
+                        </td>
+                        <td>
+                            <%= item.quantity %>
+                        </td>
+                        <td>
+                            <%= item.language %>
+                        </td>
+                        <td>
+                            <%= item.paymentMode %>
+                        </td>
+                        <td>
+                            <%= item.createdBy %>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+
+        <div class="footer">
+            Generated on <%= date %> | Manual Order System
+        </div>
+    </div>
+</body>
+
+</html>

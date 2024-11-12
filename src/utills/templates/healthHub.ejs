@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Receipt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background-color: #f5f5f5 !important;
+        }
+
+        .receipt {
+            width: 80% !important;
+            margin: 10px auto !important;
+            background-color: white !important;
+            padding: 20px !important;
+        }
+
+        .header {
+            text-align: center !important;
+            margin-bottom: 10px !important;
+            font-size: 15px;
+        }
+
+        .header h3 {
+            margin-bottom: 4px !important;
+            font-size: 14px !important;
+        }
+
+        .address {
+            margin-bottom: 20px !important;
+            font-size: 12px !important;
+        }
+
+        .details {
+            margin-bottom: 20px !important;
+        }
+
+        .table {
+            width: 100% !important;
+            border-collapse: collapse !important;
+            margin-bottom: 20px !important;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #070707 !important;
+            padding: 5px !important;
+            text-align: left !important;
+            font-size: 10px;
+        }
+
+        .company-info {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            text-align: center !important;
+        }
+
+        .company-info img {
+            width: 50px !important;
+            margin-right: 10px !important;
+        }
+
+        .company-info h2,
+        .company-info h3,
+        .company-info h6 {
+            margin: 0 !important;
+        }
+
+        .company-info h2 {
+            font-size: 13px !important;
+        }
+
+        .company-info h3 {
+            font-size: 12px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="receipt">
+        <div class="header">
+            <h3>OPD Receipt</h3>
+            <div class="company-info">
+                <img src="<%= data?.logoLink %>" alt="Company Logo" />
+                <div>
+                    <h2>MAJOR KALSHI HEALTH CARE CENTER</h2>
+                    <h3>25/35, HASHIMPUR ROAD, PRAYAGRAJ</h3>
+                    <h6>Tel : +91-6390103030</h6>
+                </div>
+            </div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <td>
+                    <%= data?.userName %>
+                </td>
+                <th>Receipt Number</th>
+                <td>
+                    <%= data?.receiptNumber %>
+                </td>
+            </tr>
+            <tr>
+                <th>Age/Sex</th>
+                <td>
+                    <%= data?.age %> YRS/<%= data?.gender %>
+                </td>
+                <th>Payment Date</th>
+                <td>
+                    <%= data?.paymentDate %>
+                </td>
+            </tr>
+            <tr>
+                <th>Mobile Number</th>
+                <td>
+                    <%= data?.phone %>
+                </td>
+                <th>Appointment Date</th>
+                <td>
+                    <%= data?.appointmentDate %>
+                </td>
+            </tr>
+            <tr>
+                <th>S No.</th>
+                <th colspan="2">Investigations</th>
+                <th>Amount</th>
+            </tr>
+            <% data?.productDetails?.map((item, index)=> { %>
+                <tr>
+                    <td scope="row">
+                        <%= index + 1 %>
+                    </td>
+                    <td colspan="2">
+                        <%= item.name %>
+                    </td>
+                    <td>
+                        <%= item.amount %>
+                    </td>
+                </tr>
+                <% }); %>
+                    <tr>
+                        <th class="bottom-text"></th>
+                        <th colspan="2">Total
+                            Amount</th>
+                        <td scope="row">
+                            <%= data?.totalAmount %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="bottom-text"></th>
+                        <th colspan="2">Amount
+                            Paid</th>
+                        <td>
+                            <%= data?.amountPaid %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="bottom-text"></th>
+                        <th colspan="2">Amount
+                            Paid in Words</th>
+                        <td>
+                            <%= data?.amountPaidInWord %>
+                        </td>
+                    </tr>
+                    <% if (data?.outstandingAmount> 0) { %>
+                        <tr>
+                            <th class="bottom-text"></th>
+                            <th colspan="2">Outstanding Amount
+                            </th>
+                            <td>
+                                <%= data?.outstandingAmount %>
+                            </td>
+                        </tr>
+                        <% } %>
+        </table>
+    </div>
+</body>
+
+</html>
